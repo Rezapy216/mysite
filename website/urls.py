@@ -5,6 +5,6 @@ urlpatterns = [
 
     path("", index_view),
     path("about", about_view),
-    path("contact_view", contact_view)
+    path("contact", contact_view)
 
 ]
