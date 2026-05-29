@@ -1,4 +1,4 @@
-django>3.2,<3.3
+django
 asgiref
 pytz
 sqlparse
