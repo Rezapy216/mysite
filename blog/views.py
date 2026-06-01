@@ -5,5 +5,6 @@ def blog_home_view(request):
 
 
 def blog_single_view(request):
-    return render(request, "blog/blog-single.html")
+    context = {'title': "bitcoin is gooooood", "content": 'test content'}
+    return render(request, "blog/blog-single.html", context)
 
