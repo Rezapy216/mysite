@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post
+from blog.models import Post, Category
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('author',)
     
 admin.site.register(Post, PostAdmin)
+admin.site.register(Category)
