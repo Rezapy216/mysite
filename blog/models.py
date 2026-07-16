@@ -14,7 +14,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    images = models.ImageField(upload_to='blog/', default='blog/default.jpg')
+    image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
     category = models.ManyToManyField(Category)
 
     class Meta:
