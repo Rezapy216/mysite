@@ -1,8 +1,10 @@
 from sqlite3 import connect
 from unicodedata import category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from blog.models import Post
+from website.models import Contact
+from blog.forms import NameForm
 
 
 def blog_home_view(request, cat_name=None, author_username=None):
@@ -41,9 +43,17 @@ def blog_single_view(request, pid):
 
 
 def test(request):
-    posts = Post.objects.filter(status=1)
-    context = {'posts': posts}
-    return render(request, 'test.html', context)
+    if request.method == "POST":
+        form = NameForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            return HttpResponse('done')
+    form = NameForm()
+    return render(request, 'test.html', {'form': form})
 
 
 def blog_category(request, cat_name):
