@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from blog.models import Post
 from website.models import Contact
-from blog.forms import NameForm
+from blog.forms import NameForm, ContactForm
 
 
 def blog_home_view(request, cat_name=None, author_username=None):
@@ -44,15 +44,12 @@ def blog_single_view(request, pid):
 
 def test(request):
     if request.method == "POST":
-        form = NameForm(request.POST)
+        form = ContactForm(request.POST)
 
         if form.is_valid():
-            name = form.cleaned_data['name']
-            subject = form.cleaned_data['subject']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            form.save()
             return HttpResponse('done')
-    form = NameForm()
+    form = ContactForm()
     return render(request, 'test.html', {'form': form})
 
 
