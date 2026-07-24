@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.contrib import messages
+from website.forms import NameForm, ContactForm
 from django.http import HttpResponse, JsonResponse
 import json
 
@@ -13,7 +14,15 @@ def about_view(request):
 
 
 def contact_view(request):
-    return render(request, "website/contact.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'Your ticket submited successfully')
+            form.save()
+        else:
+            messages.add_message(request, messages.ERROR, "Your ticket didn't submited")
+    form = ContactForm()
+    return render(request, "website/contact.html", {'form': form})
 
 
 
