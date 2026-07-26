@@ -17,10 +17,10 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            messages.add_message(request, messages.SUCCESS, 'Your ticket submited successfully')
+            messages.add_message(request, messages.SUCCESS, 'Your ticket submitted successfully')
             form.save()
         else:
-            messages.add_message(request, messages.ERROR, "Your ticket didn't submited")
+            messages.add_message(request, messages.ERROR, "Your ticket didn't submitted")
     form = ContactForm()
     return render(request, "website/contact.html", {'form': form})
 
